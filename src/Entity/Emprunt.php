@@ -24,11 +24,11 @@ class Emprunt
     private ?\DateTime $date_retour_effective = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]//Suppression en cascade : si un livre est supprimé, tous les emprunts associés sont aussi supprimés
     private ?Livre $livre = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]//Suppression en cascade : si un abonné est supprimé, tous les emprunts associés sont aussi supprimés
     private ?Abonne $abonne = null;
 
     public function getId(): ?int
