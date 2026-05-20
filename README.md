@@ -10,9 +10,9 @@
 - Modifier le .env pour la ligne DATABASE afin d'ajouter les bons credentials de connexion à la base de données
 
 ### Dans le terminal 
-- Mettre la commande symfony serve
-- Créer la base de données avec la commande php bin/console doctrine:database:create    
-- Charger mes fixtures avec la commande php bin/console doctrine:fixtures:load pour peupler la base de données avec des données fictives.
+- Mettre la commande ```symfony serve```
+- Créer la base de données avec la commande ```php bin/console doctrine:database:create```
+- Charger mes fixtures avec la commande ```php bin/console doctrine:fixtures:load``` pour peupler la base de données avec des données fictives.
 Voici la base de données prête avec des informations visibles
 
 ### Dans le navigateur
@@ -32,7 +32,8 @@ En cas de besoin le dumpSQL mediatheque.sql est disponible à la racine du proje
 ### L'API 
 
 Les appels API ne sont possibles qu'une fois connecté avec un compte admin ou bibliothecaire. Ensuite les appels possibles sont les suivants : 
-Avec **GET** : pour voir les livres ou un livre en particulier
+
+**GET** : pour voir les livres ou un livre en particulier
 -/api/livres
 -/api/livres/{id du livre}
 
