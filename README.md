@@ -31,17 +31,23 @@ En cas de besoin le dumpSQL mediatheque.sql est disponible à la racine du proje
 
 ### L'API 
 
-Les appels API ne sont possibles qu'une fois connecté avec un compte admin ou bibliothecaire. Ensuite les appels possibles sont les suivants : 
+Les appels API ne sont possibles qu'une fois connecté avec un compte admin ou bibliothecaire. 
+Ensuite les appels possibles sont les suivants : 
 
 **GET** : pour voir les livres ou un livre en particulier
--/api/livres
--/api/livres/{id du livre}
+
+/api/livres
+
+/api/livres/{id du livre}
 
 **POST** : pour ajouter un livre
--/api/livres
+
+/api/livres
 
 **PUT** : pour modifier un livre
--/api/livres/{id du livre}
+
+/api/livres/{id du livre}
 
 **DELETE** : pour supprimer un livre
--/api/livres/{id du livre}
+
+/api/livres/{id du livre}
