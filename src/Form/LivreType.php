@@ -16,7 +16,6 @@ class LivreType extends AbstractType
             ->add('auteur')
             ->add('isbn')
             ->add('date_publication')
-            ->add('disponible')
         ;
     }
 
