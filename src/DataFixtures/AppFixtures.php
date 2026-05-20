@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
 
         $user2 = new User();
         $user2->setEmail('bibliothecaire@biblio.com');
-        $user2->setRoles(['ROLE_USER']);
+        $user2->setRoles(['ROLE_BIBLIOTHECAIRE']);
         $hashedPassword = $this->passwordHasher->hashPassword($user2, 'password123');
         $user2->setPassword($hashedPassword);
         $manager->persist($user2);
