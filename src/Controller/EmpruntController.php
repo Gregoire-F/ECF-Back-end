@@ -23,13 +23,21 @@ final class EmpruntController extends AbstractController
     }
 
     #[Route('/new', name: 'app_emprunt_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, EmpruntRepository $empruntRepository): Response
     {
         $emprunt = new Emprunt();
         $form = $this->createForm(EmpruntType::class, $emprunt);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $livre = $emprunt->getLivre();
+            // Vérifier que le livre n'a pas d'emprunt actif
+            if ($empruntRepository->findActiveByLivre($livre)) {
+                $this->addFlash('error', 'Ce livre est déjà emprunté.');
+                return $this->redirectToRoute('app_emprunt_new');
+            }
+            // Marquer le livre comme non disponible
+            $livre->setDisponible(false);
             $entityManager->persist($emprunt);
             $entityManager->flush();
 
@@ -71,7 +79,7 @@ final class EmpruntController extends AbstractController
     #[Route('/{id}', name: 'app_emprunt_delete', methods: ['POST'])]
     public function delete(Request $request, Emprunt $emprunt, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$emprunt->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $emprunt->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($emprunt);
             $entityManager->flush();
         }
