@@ -13,7 +13,12 @@
 - Mettre la commande symfony serve
 - Créer la base de données avec la commande php bin/console doctrine:database:create    
 - Charger mes fixtures avec la commande php bin/console doctrine:fixtures:load pour peupler la base de données avec des données fictives.
-Voici la base de données prête avec des informations visibles.
+Voici la base de données prête avec des informations visibles
+
+### Dans le navigateur
+
+- Taper /home dans la barre d'URL 
+- Se connecter avec les credentials donnés ci-dessous
 
 ### Les identifiants de connexion ###
 
