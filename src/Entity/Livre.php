@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\LivreRepository;
-use BcMath\Number;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,7 +21,7 @@ class Livre
     private ?string $auteur = null;
 
     #[ORM\Column(type: Types::STRING, length: 20)]
-    private ?Number $isbn = null;
+    private ?string $isbn = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_publication = null;
@@ -64,7 +63,7 @@ class Livre
         return $this->isbn;
     }
 
-    public function setIsbn(Number $isbn): static
+    public function setIsbn(?string $isbn): static
     {
         $this->isbn = $isbn;
 

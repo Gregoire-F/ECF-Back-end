@@ -23,12 +23,10 @@ class Emprunt
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $date_retour_effective = null;
 
-    #[ORM\Column]
-    private ?int $livre_id = null;
-
-     #[ORM\ManyToOne(inversedBy: 'emprunts')]
+    #[ORM\ManyToOne(inversedBy: 'emprunts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Livre $livre = null;
+
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Abonne $abonne = null;
@@ -74,17 +72,18 @@ class Emprunt
         return $this;
     }
 
-    public function getLivreId(): ?int
+    public function getLivre(): ?Livre
     {
-        return $this->livre_id;
+        return $this->livre;
     }
 
-    public function setLivreId(int $livre_id): static
+    public function setLivre(?Livre $livre): static
     {
-        $this->livre_id = $livre_id;
+        $this->livre = $livre;
 
         return $this;
     }
+
     public function getAbonne(): ?Abonne
     {
         return $this->abonne;
