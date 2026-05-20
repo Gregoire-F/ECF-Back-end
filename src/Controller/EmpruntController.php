@@ -65,6 +65,9 @@ final class EmpruntController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($emprunt->getDateRetourEffective() !== null) {
+                $emprunt->getLivre()->setDisponible(true);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_emprunt_index', [], Response::HTTP_SEE_OTHER);
