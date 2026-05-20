@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/emprunt')]
+#[IsGranted('ROLE_BIBLIOTHECAIRE')]
 final class EmpruntController extends AbstractController
 {
     #[Route(name: 'app_emprunt_index', methods: ['GET'])]
@@ -31,11 +33,13 @@ final class EmpruntController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $livre = $emprunt->getLivre();
-            // Vérifier que le livre n'a pas d'emprunt actif
-            if ($empruntRepository->findActiveByLivre($livre)) {
-                $this->addFlash('error', 'Ce livre est déjà emprunté.');
+            
+            // Vérifier que le livre est disponible
+            if (!$livre->isDisponible()) {
+                $this->addFlash('error', 'Ce livre n\'est pas disponible.');
                 return $this->redirectToRoute('app_emprunt_new');
             }
+            
             // Marquer le livre comme non disponible
             $livre->setDisponible(false);
             $entityManager->persist($emprunt);

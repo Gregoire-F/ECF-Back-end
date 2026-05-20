@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EmpruntRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
 class Emprunt
@@ -24,11 +25,15 @@ class Emprunt
     private ?\DateTime $date_retour_effective = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]//Suppression en cascade : si un livre est supprimé, tous les emprunts associés sont aussi supprimés
+    #[Assert\Expression(
+        expression: 'this.getLivre() === null || this.getLivre().isDisponible() === true',
+        message: 'Ce livre n\'est pas disponible.'
+    )]
     private ?Livre $livre = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]//Suppression en cascade : si un abonné est supprimé, tous les emprunts associés sont aussi supprimés
     private ?Abonne $abonne = null;
 
     public function getId(): ?int

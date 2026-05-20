@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .home-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; display: flex; justify-content: center; flex-direction: column; align-items: center; }
+    .btn-connexion { display: inline-block; padding: 0.5em 1em; background-color: black; color: white; border: none; border-radius: 4px; text-decoration: none; font-size: 16px; cursor: pointer; }
+    .btn-connexion:hover { background-color: #0056b3 }
+    .btn-flex { display: flex; margin-top: 20px; }
+
+</style>
+
+<div class="home-wrapper">
+    <h1>Bienvenue sur le gestionnaire de livres</h1>
+    <div class="btn-flex"><a href="{{ path('app_login') }}" class="btn-connexion">Vous connecter</a></div>
+</div>
+{% endblock %}

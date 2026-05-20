@@ -21,6 +21,12 @@ class EmpruntType extends AbstractType
             ->add('livre', EntityType::class, [
                 'class' => Livre::class,
                 'choice_label' => 'titre',
+                'query_builder' => function ($repo) {
+                    return $repo->createQueryBuilder('l')
+                        ->where('l.disponible = :disponible')
+                        ->setParameter('disponible', true)
+                        ->orderBy('l.titre', 'ASC');
+                },
             ])
             ->add('abonne', EntityType::class, [
                 'class' => Abonne::class,
