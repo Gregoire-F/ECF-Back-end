@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/abonne')]
+#[IsGranted('ROLE_BIBLIOTHECAIRE')]
 final class AbonneController extends AbstractController
 {
     #[Route(name: 'app_abonne_index', methods: ['GET'])]
